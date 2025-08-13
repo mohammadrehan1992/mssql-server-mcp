@@ -1,6 +1,71 @@
 # SQL Server MCP (Model Context Protocol) Server
 
-A Model Context Protocol (MCP) implementation for Microsoft SQL Server that enables interaction with SQL Server databases through a standardized protocol.
+A Model Context Protocol (MCP) implementation for Microsoft SQL Server that enables interaction with SQL Server databases through a standardized protocol. This implementation can be used with various AI coding assistants like GitHub Copilot, Anthropic's Claude, or Cursor to provide SQL Server database capabilities in your development environment.
+
+## Using with AI Coding Assistants
+
+### VS Code with GitHub Copilot
+
+1. Install this MCP server:
+```bash
+git clone https://github.com/mohammadrehan1992/mssql-server-mcp.git
+cd mssql-server-mcp
+npm install
+```
+
+2. Configure your database connection in `.env`
+
+3. Start the MCP server:
+```bash
+npm start
+```
+
+4. In VS Code settings.json, add:
+```json
+{
+    "github.copilot.advanced": {
+        "mcpServer": "http://localhost:3000"
+    }
+}
+```
+
+Now Copilot can interact with your SQL Server database through natural language!
+
+### Anthropic's Claude
+
+1. Follow steps 1-3 from above to set up the MCP server
+
+2. When using Claude in VS Code, configure the extension settings to point to your MCP server:
+```json
+{
+    "anthropic.claude.mcpServer": "http://localhost:3000"
+}
+```
+
+3. Claude will now be able to help you with SQL Server database operations!
+
+### Cursor
+
+1. Follow steps 1-3 to set up the MCP server
+
+2. In Cursor's settings, add the MCP configuration:
+```json
+{
+    "mcp": {
+        "sqlServer": "http://localhost:3000"
+    }
+}
+```
+
+### Example AI Interactions
+
+You can now ask your AI assistant natural language questions like:
+- "Show me all users who joined in the last month"
+- "Create a new table for storing customer orders"
+- "Update the status of order #12345 to 'shipped'"
+- "Get the total sales for each product category"
+
+The AI will translate these into proper SQL queries and execute them through the MCP server.
 
 ## Features
 
