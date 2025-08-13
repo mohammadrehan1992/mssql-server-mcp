@@ -1,26 +1,31 @@
-# SQL Server MCP (Model Context Protocol) Server
+# SQL Server MCP Server
 
-A Model Context Protocol (MCP) implementation for Microsoft SQL Server that enables interaction with SQL Server databases through a standardized protocol. This implementation can be used with various AI coding assistants like GitHub Copilot, Anthropic's Claude, or Cursor to provide SQL Server database capabilities in your development environment.
+A Model Context Protocol (MCP) server that allows your VS Code AI assistants (like GitHub Copilot or Claude) to interact with SQL Server databases. With this, your AI can help you write and execute SQL queries directly in VS Code.
 
-## Using with AI Coding Assistants
+## Quick Setup
 
-### VS Code with GitHub Copilot
-
-1. Install this MCP server:
+1. Clone and install:
 ```bash
 git clone https://github.com/mohammadrehan1992/mssql-server-mcp.git
 cd mssql-server-mcp
 npm install
 ```
 
-2. Configure your database connection in `.env`
+2. Create `.env` file with your SQL Server details:
+```env
+DB_SERVER=your_server_name
+DB_NAME=your_database_name
+DB_USER=your_username
+DB_PASSWORD=your_password
+PORT=3000
+```
 
-3. Start the MCP server:
+3. Start the server:
 ```bash
 npm start
 ```
 
-4. In VS Code settings.json, add:
+4. In VS Code, open settings.json (Ctrl+Shift+P -> "Preferences: Open Settings (JSON)") and add:
 ```json
 {
     "github.copilot.advanced": {
@@ -29,43 +34,14 @@ npm start
 }
 ```
 
-Now Copilot can interact with your SQL Server database through natural language!
+That's it! Now you can ask Copilot to help you with SQL queries in your database.
 
-### Anthropic's Claude
+## What You Can Do
 
-1. Follow steps 1-3 from above to set up the MCP server
-
-2. When using Claude in VS Code, configure the extension settings to point to your MCP server:
-```json
-{
-    "anthropic.claude.mcpServer": "http://localhost:3000"
-}
-```
-
-3. Claude will now be able to help you with SQL Server database operations!
-
-### Cursor
-
-1. Follow steps 1-3 to set up the MCP server
-
-2. In Cursor's settings, add the MCP configuration:
-```json
-{
-    "mcp": {
-        "sqlServer": "http://localhost:3000"
-    }
-}
-```
-
-### Example AI Interactions
-
-You can now ask your AI assistant natural language questions like:
-- "Show me all users who joined in the last month"
-- "Create a new table for storing customer orders"
-- "Update the status of order #12345 to 'shipped'"
-- "Get the total sales for each product category"
-
-The AI will translate these into proper SQL queries and execute them through the MCP server.
+- Write and execute SQL queries using natural language
+- Get help with complex SQL operations
+- Let AI assist with database schema changes
+- Debug SQL issues with AI help
 
 ## Features
 
@@ -140,43 +116,27 @@ Content-Type: application/json
 }
 ```
 
-## Configuration
+## Troubleshooting
 
-The server can be configured through environment variables or a `.env` file:
+1. Make sure SQL Server is running and accessible
+2. Check your `.env` credentials
+3. Confirm the MCP server is running (http://localhost:3000/status should return "ok")
+4. Verify VS Code settings are correct
+5. Restart VS Code if settings were changed
 
-- `DB_SERVER` - SQL Server instance name or IP address
-- `DB_NAME` - Database name
-- `DB_USER` - SQL Server authentication username
-- `DB_PASSWORD` - SQL Server authentication password
-- `PORT` - Server port (default: 3000)
+## Examples
 
-## Error Handling
-
-The server implements standard MCP error responses:
-
-- Connection errors
-- Query execution errors
-- Parameter validation errors
-- Transaction errors
-
-## Security
-
-- Uses parameterized queries to prevent SQL injection
-- Supports SQL Server authentication and Windows Authentication
-- Environment variable based configuration for sensitive data
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch: `git checkout -b feature/YourFeature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin feature/YourFeature`
-5. Submit a pull request
+Ask your AI assistant things like:
+```
+"Create a table for storing user profiles"
+"Show me how to query orders placed in the last week"
+"Help me write a stored procedure for calculating monthly sales"
+```
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+MIT License - Use it freely in your projects!
 
-## Support
+## Need Help?
 
-For support, please open an issue in the GitHub repository or contact the maintainers.
+Open an issue on GitHub if you run into problems.
